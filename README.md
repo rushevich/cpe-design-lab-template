@@ -1,1 +1,1 @@
-# cpe-design-lab-template
+This is a baseline LaTeX template for University of Florida lab reports, designed to be both functional and a teaching tool for students new to the software. It contains annotated examples of common technical report elements like schematics, math equations, and code blocks. To get started, upload the .tex file and your images to an Overleaf project and follow the comments in the code.
