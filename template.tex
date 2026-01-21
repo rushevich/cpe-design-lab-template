@@ -1,0 +1,110 @@
+% LaTeX is a simple yet highly dynamic and expandable typesetting language. It is the industry standard for academic writing, scientific and technical documentation, and overall just much more useful than other formats like Microsoft Word, once you get up to speed.
+
+% This document will serve as a baseline lab report template, but also a basic introduction to LaTeX that will serve as a foundation for further learning of the language.
+
+% Firstly, aside from text itself, symbols are the fundamental building blocks in LaTeX. These are the text containers and wrappers distinguished with the backslash (\), and they allow us to manipulate our page and text in an intuitive and direct fashion.
+
+\documentclass{article}
+% The document class defines the overall layout. "article" is the standard for short papers and lab reports.
+
+% The area between \documentclass and \begin{document} is called the "Preamble."
+% This is where you load packages to add functionality.
+
+\usepackage{geometry} % Allows us to modify page margins and other characteristics.
+\geometry{letterpaper, left=20mm, top=20mm, right=20mm, bottom=20mm}
+
+\usepackage{graphicx} % Essential for including images/plots
+\usepackage{amsmath}  % The industry standard for formatting math equations
+\usepackage{listings} % For including nicely formatted code blocks
+\usepackage{xcolor}   % For adding color to code or text
+\usepackage{hyperref} % Allows for clickable links and cross-references
+
+% Simple setup for code blocks
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    stringstyle=\color{red},
+    frame=single
+}
+
+\begin{document} % This must be the fist wrapper, and text in here actually gets rendered.
+% This is the header. Also, \textbf means text boldface. \textit is italic and \underline is underline, obviously.
+\noindent \textbf{Name:} Albert Gator \\
+\textbf{Date:} \today \\ % \today automatically inserts the current date
+\textbf{UFID:} 1234-5678
+
+\begin{center} % the begin symbol can also create centered blocks
+    \large\textbf{Report - [Module Name]}
+\end{center}
+
+\section{Introduction}
+% Sections automatically handle numbering and table of contents generation.
+The introduction should be one to two paragraphs and include background information on the module’s hardware and explain the goal(s) of the design. % to line break, we need to have two carriage returns. so effectively just have empty lines where you want a line break.
+
+\noindent Remember: \textbf{effective technical reports convey the key essential information in a concise and clear manner.} Focus on quality, not length. You can also cite references or link to datasheets using the \texttt{hyperref} package.
+
+\section{Design}
+The design section should include a detailed description of the module’s design and how it was implemented. Hardware and software layout diagrams (e.g., hardware connection block diagrams or software flow charts) should be included.
+
+% image example
+% Figures are "floats." LaTeX decides the best place to put them based on any additional directives and the image size. 
+% [h] tells LaTeX to put it *h*ere. an exclamation point is to override, so essentially put it here, forced. If you dont distinguish with [h] (or [h!]) or [t] (for top) or any other directions, LaTeX will place the image at the top
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\linewidth]{Picture1.png} % images must be in the same directory for proper compilation. overleaf makes this very simple 
+    \caption{Frequency response of the active filter modeled in LTSpice. Notice how the caption is always below the figure.}
+    \label{fig:results} % Labels allow you to reference this figure later (e.g., "As seen in Fig. 1")
+\end{figure}
+
+% math example
+% For engineering, math is vital.
+% Use $ $ for inline math like $V_{out} = I \cdot R$.
+% Use \[ \] for centered, standout equations.
+\subsection{Theoretical Calculations}
+Before implementing the design, we calculate the expected gain using the following transfer function:
+
+\[ A_v = -\frac{R_f}{R_{in}} \]
+% the same can be accomplished using double dollar signs. math symbols are also very intuitive as seen below. notably, sub/superscript is done with _{} or ^{} respectively.
+% $$
+% e^{i\pi} = 1
+% $$
+\section{Results and Discussion}
+The experimental results should be displayed in this section. When comparing data, tables are often clearer than lists.
+
+% table example
+\begin{table}[ht]
+    \centering
+    \caption{Comparison of Theoretical vs. Measured Voltage}
+    \begin{tabular}{|c|c|} % 'c' means centered columns and '|' adds vertical lines
+        \hline
+        Theoretical (V) & Measured (V) \\
+        \hline
+        5.0 & 4.92 \\ % note that the \\ symbol creates a line break too
+        4.8 & 4.75 \\
+        2.1 & 1.95 \\
+        \hline
+    \end{tabular}
+    \label{tab:data}
+\end{table}
+
+\section{Conclusion}
+The conclusion should compare the experimental results (Table \ref{tab:data}) to the theoretical results and explain any discrepancies. This section should also list any difficulties encountered during implementation (e.g., noisy signals, component tolerances) and describe the design’s success.
+
+% appendix and code
+\newpage % Starts a new page for the appendix
+\appendix
+\section{Code Snippets}
+If your lab involves programming , you can include your source code here using the \texttt{lstlisting} environment.
+
+\begin{lstlisting}[language=C++, caption=Sample Initialization Code]
+void setup() {
+    // Initialize digital pin LED_BUILTIN as an output.
+    pinMode(LED_BUILTIN, OUTPUT);
+}
+\end{lstlisting}
+
+\end{document}
+
+% Never hesitate to look something up if you need to. LaTeX is used ubiquitously, so chances are, if you can think of some specific functionality, there is probably package for it with documentation or a guide.
